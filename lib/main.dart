@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+
 import './quote.dart';
+import './get-quote-button.dart';
 
 void main() {
   runApp(App());
@@ -49,7 +51,6 @@ class AppState extends State<App> {
     "“You Don’t Have To Be Great To Start, But You Have To Start To Be Great.” – Zig Ziglar",
     "“A Clear Vision, Backed By Definite Plans, Gi… Of Confidence And Personal Power.” – Brian Tracy",
     "“There Are No Limits To What You Can Accomplis…ts You Place On Your Own Thinking.” – Brian Tracy",
-    "Success Quotes For Inspirational Leaders",
     "“Integrity Is The Most Valuable And Respected Quality Of Leadership. Always Keep Your Word.”",
     "“Leadership Is The Ability To Get Extraordinary Achievement From Ordinary People”",
     "“Leaders Set High Standards. Refuse To Tolerate Mediocrity Or Poor Performance”",
@@ -71,6 +72,16 @@ class AppState extends State<App> {
     "“Leaders Are Innovative, Entrepreneurial, And …re-Oriented. They Focus On Getting The Job Done.”",
     "“Leaders Are Never Satisfied; They Continually Strive To Be Better.”"
   ];
+  void _handlePressed() {
+    setState(() {
+      if (this._currentQuoteIndex == this._quoteList.length - 1) {
+        this._currentQuoteIndex = 0;
+      } else {
+        this._currentQuoteIndex++;
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext ctx) {
     return MaterialApp(
@@ -82,7 +93,10 @@ class AppState extends State<App> {
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [Quote(this._quoteList[this._currentQuoteIndex])],
+          children: [
+            Quote(this._quoteList[this._currentQuoteIndex]),
+            QuoteButton(this._handlePressed)
+          ],
         ),
       ),
     );
